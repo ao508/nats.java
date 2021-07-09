@@ -438,7 +438,8 @@ public class NatsJetStream implements JetStream, JetStreamManagement, NatsJetStr
 
                 // Make sure the subject matches or is a subset...
                 String existingFilterSubject = cc.getFilterSubject();
-                if (filterSubject != null && !filterSubject.equals(existingFilterSubject)) {
+                String modifiedExistingFilterSubject = existingFilterSubject.replace(">","").replace("*","");
+                if (filterSubject != null && !filterSubject.equals(existingFilterSubject) && !filterSubject.contains(modifiedExistingFilterSubject)) {
                     throw new IllegalArgumentException(
                             String.format("Subject %s mismatches consumer configuration %s.", subject, filterSubject));
                 }

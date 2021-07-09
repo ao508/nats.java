@@ -437,7 +437,11 @@ public class NatsJetStream implements JetStream, JetStreamManagement, NatsJetStr
                 ConsumerConfiguration cc = consumerInfo.getConsumerConfiguration();
 
                 // Make sure the subject matches or is a subset...
+                
                 String existingFilterSubject = cc.getFilterSubject();
+                System.out.println("Existing filter subject: " + existingFilterSubject);
+                System.out.println("Input filter subject: " + filterSubject);
+                System.out.println("Subject subscribed to: " + subject);
                 String modifiedExistingFilterSubject = existingFilterSubject.replaceAll("\\.>|\\.*", "");
                 if (filterSubject != null && !filterSubject.equals(existingFilterSubject) && !subject.contains(modifiedExistingFilterSubject)) {
                     throw new IllegalArgumentException(

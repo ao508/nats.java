@@ -439,12 +439,12 @@ public class NatsJetStream implements JetStream, JetStreamManagement, NatsJetStr
                 // Make sure the subject matches or is a subset...
                 String existingFilterSubject = cc.getFilterSubject();
                 String modifiedExistingFilterSubject = existingFilterSubject.replaceAll("\\.>|\\.*", "");
-                if (filterSubject != null && !filterSubject.equals(existingFilterSubject) && !filterSubject.contains(modifiedExistingFilterSubject)) {
+                if (filterSubject != null && !filterSubject.equals(existingFilterSubject) && !subject.contains(modifiedExistingFilterSubject)) {
                     throw new IllegalArgumentException(
                             String.format("Subject %s mismatches consumer configuration %s.", subject, filterSubject));
                 }
 
-                filterSubject = existingFilterSubject;
+//                filterSubject = existingFilterSubject;
 
                 // use the deliver subject as the inbox. It may be null, that's ok
                 inbox = cc.getDeliverSubject();
